@@ -32,14 +32,18 @@ check_file_mirror() {
 check_file_mirror "standards/code-documentation-standards.md"
 check_file_mirror "standards/coding-standards.md"
 check_file_mirror "standards/documentation-standards.md"
+check_file_mirror "standards/git-and-pr-standards.md"
 check_file_mirror "standards/memory-policy.md"
 check_file_mirror "standards/workflow-standards.md"
 
+check_file_mirror "templates/commit-template.md"
 check_file_mirror "templates/context-template.md"
 check_file_mirror "templates/handoff-template.md"
 check_file_mirror "templates/plan-template.md"
+check_file_mirror "templates/pull-request-template.md"
 
 check_file_mirror "skills/commit-cleanup/SKILL.md"
+check_file_mirror "skills/create-pr/SKILL.md"
 check_file_mirror "skills/generate-docs/SKILL.md"
 check_file_mirror "skills/handoff/SKILL.md"
 check_file_mirror "skills/project-ai-refresh/SKILL.md"

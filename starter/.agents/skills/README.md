@@ -11,3 +11,4 @@ This directory contains executable agent skills and slash commands available for
 - `/refactor-code`: Performs controlled code refactoring without altering public behavior or contracts.
 - `/generate-docs`: Synchronizes READMEs, docstrings, and API documentation with code implementation.
 - `/commit-cleanup`: Performs pre-commit hygiene sweep and generates a commit readiness report.
+- `/create-pr`: Prepares, validates, and creates a GitHub pull request with a compliant description.

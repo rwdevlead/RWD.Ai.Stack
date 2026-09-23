@@ -53,7 +53,16 @@ Every AI session operating on this repository MUST follow this 5-step lifecycle:
 
 ---
 
-## 3. Workspace & File Hygiene
+## 3. Git & Pull Request Lifecycle
+
+Before submitting work or opening a PR:
+- **Git & PR Standards:** Follow [`.agents/standards/git-and-pr-standards.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/standards/git-and-pr-standards.md) for branch naming, commit format, and quality gates.
+- **Pre-Commit Sweep:** Run `/commit-cleanup` to inspect git hygiene, verify tests, and generate conventional commit messages matching [`.agents/templates/commit-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/commit-template.md).
+- **Create Pull Requests:** Run `/create-pr` to review branch diffs, validate quality gates, and draft or submit structured PRs using [`.agents/templates/pull-request-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/pull-request-template.md).
+
+---
+
+## 4. Workspace & File Hygiene
 
 - **No Stray Files:** Place scratch scripts or temporary files in the designated scratch directory.
 - **Clean Workspace:** Keep root directory clutter-free. Only canonical top-level files (`AGENTS.md`, `README.md`) belong in the root.

@@ -1,12 +1,12 @@
 ---
 name: commit-cleanup
-description: Perform final code, documentation, and memory cleanup sweep before committing changes to version control. Trigger with "/commit-cleanup".
-argument-hint: "[optional notes or scope]"
+description: Perform code cleanup sweep, verify tests, stage changes, commit with Conventional Commits, and push to remote after user confirmation. Trigger with "/commit-cleanup" or "/commit".
+argument-hint: "[optional commit message or scope]"
 ---
 
 # Purpose
 
-The `/commit-cleanup` skill performs a low-risk pre-commit sweep for **{{PROJECT_NAME}}**. It ensures debug logging, dead code, and formatting inconsistencies are resolved, and updates session memory state before committing code to git.
+The `/commit-cleanup` skill performs a pre-commit sweep, verifies tests and memory, and safely stages, commits, and pushes changes to git after explicit user confirmation.
 
 ---
 
@@ -27,16 +27,31 @@ Inspect modified files (`git status` / `git diff`) and perform cleanup:
 
 ---
 
-## Step 3 — Commit Readiness Report
+## Step 3 — Summary & User Confirmation Gate
 
-Output a structured report:
+Before staging or committing any files, present a complete pre-commit action plan to the user:
 
-```markdown
-### Pre-Commit Cleanup Summary
-- [ ] Code Hygiene: Debug logs, dead code, and unused imports removed.
-- [ ] Verification: Build/tests passed.
-- [ ] Memory Sync: `.agents/memory/` files updated.
+1. **Files to be staged:** List all modified and untracked files to be added via `git add .`.
+2. **Proposed Conventional Commit Message:** Draft subject line and body following `.agents/standards/git-and-pr-standards.md` and `.agents/templates/commit-template.md`.
+3. **Remote Push Target:** Identify the target remote branch for `git push`.
 
-### Suggested Commit Message
-`feat/fix/chore: concise conventional commit title`
-```
+> **MANDATORY GATE:** Stop and ask the user for confirmation. Do NOT execute `git add`, `git commit`, or `git push` until the user explicitly confirms (e.g. "yes" or "proceed").
+
+---
+
+## Step 4 — Staging, Commit, and Push Execution
+
+Only after explicit user confirmation:
+1. **Stage Changes:**
+   ```bash
+   git add .
+   ```
+2. **Commit:**
+   ```bash
+   git commit -m "<type>(<scope>): <concise subject>" -m "<optional body>"
+   ```
+3. **Push to Remote:**
+   ```bash
+   git push -u origin <current-branch>
+   ```
+4. **Final Confirmation:** Report the commit hash, remote branch status, and clean working tree.
