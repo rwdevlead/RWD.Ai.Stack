@@ -19,6 +19,11 @@ All branches should use short, descriptive names prefixed by the change type. Us
 
 If tracking an issue or ticket number, include it after the prefix: `feature/42-pr-template`.
 
+### Branch Protection: Never Commit Directly to Main
+The `main` (or `master`) branch is the protected base branch. 
+- **Direct Commits Prohibited:** AI agents and developers must never commit directly to `main`.
+- **Automatic Branch Creation:** If work begins on `main`, the agent must inspect changes, suggest an appropriate branch name (e.g. `feature/<topic>` or `fix/<topic>`), and switch branches (`git checkout -b <branch-name>`) before staging or committing.
+
 ---
 
 ## 2. Commit Message Standards
@@ -63,25 +68,36 @@ Commits must follow the **Conventional Commits** specification. This keeps git h
 - Do not mix refactoring with new feature code in one commit.
 - Keep code clean before committing: no leftover debug logging or dead code.
 
+### Push Preferences: Remote Push vs. Leave Local
+When executing a commit, the agent must ask the user their push preference:
+- **Option 1: Commit and Push:** Run `git commit` and immediately push upstream (`git push -u origin <branch>`).
+- **Option 2: Commit Local Only:** Run `git commit` and leave the commit local on the current branch. This allows batching multiple commits before sharing.
+
 ---
 
-## 3. Pull Request (PR) Standards
+## 3. Pull Request (PR) & Merge Request (MR) Standards
 
-Pull requests are the primary gate for merging changes into the base branch (`main`).
+Pull requests (GitHub) and Merge requests (GitLab / Bitbucket / Azure DevOps) are the primary gate for merging changes into the base branch (`main`).
 
 ### Scope Control
 - Keep pull requests small and focused.
 - Target fewer than 400 lines of changed code where practical. Smaller PRs are reviewed faster and with fewer mistakes.
 - Break large features into sequential, reviewable pull requests.
 
-### PR Title
+### PR / MR Title
 - Follow the Conventional Commits format, matching the primary commit type:
   `feat(skills): add create-pr skill and pr template`
 
-### PR Description
-- Use `.agents/templates/pull-request-template.md` for all pull requests.
-- Provide clear context: what changed, why it changed, and how it was tested.
+### PR / MR Description
+- Use `.agents/templates/pull-request-template.md` for all pull requests and merge requests.
+- Provide clear context: what is new, what changed, why it changed, and how it was tested.
 - Include links to related issues or requirements.
+
+### Squash-Merge Commit Log Requirement
+When PRs are squash-merged, the branch is collapsed into a single commit and the PR body becomes the permanent git history. To preserve individual commit context and support Angular versioning tools:
+- The PR description **must** include a `## Commits` section listing every commit on the branch.
+- Format each line as: `- \`<short-hash>\` <type>(<scope>): <subject>`
+- This ensures `standard-version` and `semantic-release` can parse `feat:`, `fix:`, and `BREAKING CHANGE:` tokens from the squashed commit body to determine version bumps.
 
 ### Pre-PR Quality Gates
 Before opening or requesting review on a pull request, ensure:
@@ -90,3 +106,17 @@ Before opening or requesting review on a pull request, ensure:
 3. **Clean Code:** All temporary print statements, debug logging, and commented-out code are removed.
 4. **Memory & Docs:** `.agents/memory/AI_HANDOFF.md` is up-to-date, and relevant READMEs or documentation files are synchronized.
 5. **Up-to-Date Branch:** Branch is rebased or updated against latest base branch (`main`).
+
+### Pure Git & Server-Side Completion Requirement
+- **Pure Git Execution:** Use standard `git` commands (`git push -u origin <branch>`) rather than platform-specific CLI tools (`gh`, `glab`).
+- **Direct Creation Links:** The agent provides the direct web comparison/creation link for GitHub or GitLab based on the remote URL.
+- **Human Server Completion:** The agent must **never** auto-merge or complete the PR/MR. The PR/MR remains open for the developer or reviewer to inspect, review, and complete on the remote server UI.
+
+### Final Link Placement Standard
+- **Execution Scoping:** Direct links to commits and PRs/MRs must **only** be output at the conclusion of actual commit/push or PR preparation execution events (`/commit-cleanup` and `/create-pr`).
+- **Do Not Output During Inquiries/Planning:** Never output commit or PR links during planning phases, reviews, question answers, or general conversation.
+- **Clean Markdown Anchors:** Always format links as clean Markdown hyperlinks with clear labels (e.g. `🔗 [View Commit 8ade219 on GitHub](url)` or `👉 [Create Pull Request on GitHub](url)`). Never output raw unformatted URLs or percent-encoded URL walls.
+- **Placement:** When an execution step concludes, place these formatted links as the **very last lines** of the output response.
+
+
+

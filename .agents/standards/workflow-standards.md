@@ -53,12 +53,13 @@ Every AI session operating on this repository MUST follow this 5-step lifecycle:
 
 ---
 
-## 3. Git & Pull Request Lifecycle
+## 3. Git & Pull Request / Merge Request Lifecycle
 
-Before submitting work or opening a PR:
-- **Git & PR Standards:** Follow [`.agents/standards/git-and-pr-standards.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/standards/git-and-pr-standards.md) for branch naming, commit format, and quality gates.
-- **Pre-Commit Sweep:** Run `/commit-cleanup` to inspect git hygiene, verify tests, and generate conventional commit messages matching [`.agents/templates/commit-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/commit-template.md).
-- **Create Pull Requests:** Run `/create-pr` to review branch diffs, validate quality gates, and draft or submit structured PRs using [`.agents/templates/pull-request-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/pull-request-template.md).
+Before committing work or opening a PR/MR:
+- **Branch Protection:** Never commit directly to `main` or `master`. Always perform work on a dedicated topic branch (`feature/`, `fix/`, etc.). If on `main`, create a branch first.
+- **Git & PR/MR Standards:** Follow [`.agents/standards/git-and-pr-standards.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/standards/git-and-pr-standards.md) for branch naming, commit format, and quality gates.
+- **Pre-Commit Sweep:** Run `/commit-cleanup` to inspect branch guards, code hygiene, verify tests, formulate Conventional Commits, and select push preference (push immediately vs. leave local).
+- **Create Pull/Merge Requests:** Run `/create-pr` to review branch diffs, validate quality gates, push the branch, and package a structured PR/MR description and direct comparison link. The agent halts execution for the developer to review and complete the merge on the server.
 
 ---
 
