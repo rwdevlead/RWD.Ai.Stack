@@ -1,11 +1,16 @@
 ## Summary
-<!-- Short summary of what this pull request does for {{PROJECT_NAME}} and why. Keep explanations simple and direct. -->
+<!-- Short summary of what this pull request does and why. Keep explanations simple and direct. -->
 
 ## Related Issues
 <!-- Link related issues or tickets: e.g. Closes #123, Fixes #456 -->
 
 ## Changes Made
 <!-- Bullet list of specific changes made in this pull request. -->
+- 
+
+## Commits
+<!-- List each commit on this branch so the squash-merge body preserves individual history.
+     Format: - `<hash>` <type>(<scope>): <subject> -->
 - 
 
 ## Verification & Testing

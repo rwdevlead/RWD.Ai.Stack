@@ -8,6 +8,11 @@
 <!-- Bullet list of specific changes made in this pull request. -->
 - 
 
+## Commits
+<!-- List each commit on this branch so the squash-merge body preserves individual history.
+     Format: - `<hash>` <type>(<scope>): <subject> -->
+- 
+
 ## Verification & Testing
 <!-- Describe how these changes were verified. List test commands, manual test steps, or output. -->
 - [ ] Automated tests pass: `<test command>`

@@ -1,4 +1,4 @@
-# Conventional Commit Template — {{PROJECT_NAME}}
+# Conventional Commit Template
 
 Use this format to craft clear, conventional commit messages.
 
@@ -32,6 +32,10 @@ Fixes #<issue-number>]
 - `test`: Adds or fixes unit, integration, or regression tests.
 - `chore`: Modifies build tools, packages, scripts, or housekeeping.
 - `ci`: Changes CI workflows, pipelines, or automation scripts.
+
+> **Versioning Note:** Commit types drive automated version bumps when using Angular versioning tools (`standard-version`, `semantic-release`).
+> `feat` → minor version bump. `fix` → patch bump. `BREAKING CHANGE` footer → major bump.
+> Other types (`docs`, `chore`, `refactor`, etc.) do not trigger a version bump on their own.
 
 ---
 

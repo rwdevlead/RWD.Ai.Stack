@@ -1,26 +1,30 @@
 # AI_HANDOFF.md — Active Session Handoff
 
 ## Current Objective
-Implement branch protection guards, commit push choice, GFM markdown list formatting in commits, PR/MR platform templates, human-readable action cards, and strictly scoped link placement rules.
+Implement branch protection guards (prohibit direct commits to `main`), local vs. remote push choices, GFM markdown formatting in commits, native `.github/pull_request_template.md` templates, URL parameter pre-population in PR comparison links, human-readable action cards in skills, and strictly scoped link output rules.
 
 ## Current Status
-Refined `/commit-cleanup` and `/create-pr` to use human-readable summary cards (with file status indicators, clean commit previews, and compact action prompts). Updated `git-and-pr-standards.md` to strictly scope the final link output rule exclusively to commit/PR execution events. Mirrored all changes into `starter/.agents/` and verified with `scripts/validate-templates.sh` (0 errors).
+All tasks complete on branch `feature/branch-guard-and-pr-workflows`. Total of 5 commits pushed to `origin/feature/branch-guard-and-pr-workflows`. PR package is prepared and verified. `scripts/validate-templates.sh` passes with 0 errors. Working tree is clean. Ready for server-side PR completion or next session steps.
 
 ## Active Tasks
 | Task | Status | Notes |
 | :--- | :--- | :--- |
-| Branch Protection in `/commit-cleanup` | Complete | Blocks commits on `main`, suggests and checks out branch |
-| Push vs. Local Choice in `/commit-cleanup` | Complete | Prompt user to choose remote push vs. local-only commit |
-| Markdown List Formatting in `/commit-cleanup` | Complete | Preserves blank lines and `- ` bullets in commit bodies |
+| Branch Protection in `/commit-cleanup` | Complete | Blocks commits on `main`, suggests & checks out branch |
+| Push vs. Local Choice in `/commit-cleanup` | Complete | Prompts user to choose remote push vs. local-only commit |
+| Markdown List Formatting in Commits | Complete | Preserves blank lines & `- ` bullets in commit bodies |
 | Native `.github/pull_request_template.md` | Complete | Added to root and `starter/`, verified in linter |
-| Human-Readable Action Cards in Skills | Complete | Clean layout for pre-commit and PR review summaries |
-| Strictly Scoped Link Placement Rule | Complete | Output links ONLY at the end of commit/PR executions |
+| Human-Readable Action Cards in Skills | Complete | Clean layout for pre-commit & PR review summaries |
+| Mandatory URL Parameter Encoding in PR Link | Complete | Pre-populates title & body in GitHub comparison URL |
+| Strictly Scoped Link Placement Rule | Complete | Output links ONLY at end of commit/PR executions |
 | Dual-Layer Mirroring & Validation | Complete | Mirrored into `starter/` and passed `scripts/validate-templates.sh` |
 
 ## Recent Progress
-- Refined `/commit-cleanup` and `/create-pr` in root and starter kit to use human-readable summary layouts and clean markdown anchor links.
-- Updated `git-and-pr-standards.md` to clarify that links must only be output upon execution completion, never during planning or conversation.
-- Validated all templates and dual-layer mirrors (0 errors).
+- Enforced branch guard in `/commit-cleanup` and `git-and-pr-standards.md`.
+- Added push preference confirmation gate (commit & push vs. commit local only).
+- Created `.github/pull_request_template.md` in root and starter kit.
+- Updated `/create-pr` to URL-encode title and description into comparison links for multi-commit branches.
+- Updated output placement standards to restrict clickable links exclusively to the end of commit/PR execution turns.
+- Pushed 5 atomic commits to `feature/branch-guard-and-pr-workflows`.
 
 ## Immediate Next Action
-Run `/commit-cleanup` to stage, commit, and push changes on `feature/branch-guard-and-pr-workflows`.
+Merge the Pull Request on GitHub server UI, switch local branch back to `main`, and pull updated upstream changes.

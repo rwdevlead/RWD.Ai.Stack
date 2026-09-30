@@ -1,12 +1,12 @@
 ---
 name: commit-cleanup
-description: Enforce branch protection, perform code cleanup sweep, verify tests, stage changes, commit with Conventional Commits, and push or keep local after user confirmation. Trigger with "/commit-cleanup" or "/commit".
+description: Clean, commit, and optionally push changes using Conventional Commits. Enforces branch protection and runs pre-commit quality checks. Trigger with "/commit-cleanup" or "/commit".
 argument-hint: "[optional commit message or scope]"
 ---
 
 # Purpose
 
-The `/commit-cleanup` skill enforces branch protection (prohibiting direct commits to `main`), performs a pre-commit sweep, verifies tests and memory, and safely stages and commits changes, offering the user the choice to push to remote or keep local.
+Clean up code, verify tests, and commit changes safely. Prevents direct commits to `main`, offers a push-or-keep-local choice, and follows Conventional Commits for Angular-compatible versioning.
 
 ---
 
@@ -80,11 +80,11 @@ Before staging or committing any files, present a compact, human-readable summar
 ## Step 5 — Staging, Commit, and Push Execution
 
 Only after explicit user confirmation:
-1. **Stage Changes:**
+1. **Stage Changes:** Stage only the files listed in the Step 4 summary card. Do not blanket-stage with `git add .`:
    ```bash
-   git add .
+   git add <file1> <file2> ...
    ```
-2. **Commit:** Ensure bullet points and paragraphs are preserved without shell line-collapsing (use separate `-m` flags or a temporary message file):
+2. **Commit:** Follow `.agents/templates/commit-template.md` for message format. Ensure bullet points and paragraphs are preserved without shell line-collapsing (use separate `-m` flags or a temporary message file):
    ```bash
    git commit -m "<type>(<scope>): <concise subject>" -m "- Bullet 1
    - Bullet 2"

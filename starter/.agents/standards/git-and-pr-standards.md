@@ -93,6 +93,12 @@ Pull requests (GitHub) and Merge requests (GitLab / Bitbucket / Azure DevOps) ar
 - Provide clear context: what changed, why it changed, and how it was tested.
 - Include links to related issues or requirements.
 
+### Squash-Merge Commit Log Requirement
+When PRs are squash-merged, the branch is collapsed into a single commit and the PR body becomes the permanent git history. To preserve individual commit context and support Angular versioning tools:
+- The PR description **must** include a `## Commits` section listing every commit on the branch.
+- Format each line as: `- \`<short-hash>\` <type>(<scope>): <subject>`
+- This ensures `standard-version` and `semantic-release` can parse `feat:`, `fix:`, and `BREAKING CHANGE:` tokens from the squashed commit body to determine version bumps.
+
 ### Pre-PR Quality Gates
 Before opening or requesting review on a pull request, ensure:
 1. **Tests Pass:** All unit and integration tests pass cleanly.
