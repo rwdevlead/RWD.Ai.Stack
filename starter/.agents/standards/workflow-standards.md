@@ -46,20 +46,23 @@ Before writing or modifying code, inspect repository state:
 
 ## 2. Git & Branching Conventions
 
-Follow `.agents/standards/git-and-pr-standards.md` for full git and pull request workflows.
+Follow `.agents/standards/git-and-pr-standards.md` for full git and pull/merge request workflows.
+- **Branch Protection:**
+  - Never commit directly to `main` or `master`. Always work on a dedicated topic branch.
+  - If work begins on `main`, inspect changes and switch to a new branch (`git checkout -b <branch-name>`) before staging or committing.
 - **Branch Naming:**
   - Features: `feature/<short-description>`
   - Bug Fixes: `fix/<short-description>`
   - Refactoring: `refactor/<short-description>`
   - Documentation: `docs/<short-description>`
   - Maintenance: `chore/<short-description>`
-- **Commit Messages:**
+- **Commit Messages & Push Choice:**
   - Follow Conventional Commits via `.agents/templates/commit-template.md`.
   - Use clear, imperative style: `feat: add user authentication handler` or `fix: resolve null dereference in parser`.
-  - Keep commits atomic and logical.
-- **Pull Requests:**
-  - Run `/commit-cleanup` before committing to ensure clean code and memory synchronization.
-  - Run `/create-pr` to validate quality gates and generate pull request descriptions using `.agents/templates/pull-request-template.md`.
+  - Choose push preference during commit: push immediately to remote branch or leave local.
+- **Pull Requests & Merge Requests:**
+  - Run `/commit-cleanup` before committing to ensure clean code, branch guards, and memory synchronization.
+  - Run `/create-pr` to validate quality gates, push the branch, and generate the PR/MR package with direct server links. Complete and merge on the server.
 
 ---
 

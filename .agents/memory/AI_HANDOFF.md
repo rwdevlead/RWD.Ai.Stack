@@ -1,24 +1,26 @@
 # AI_HANDOFF.md — Active Session Handoff
 
 ## Current Objective
-Enforce mandatory summary and user confirmation gates across `/commit-cleanup` and `/create-pr` skills, including `git add .`, commit, and push execution. Synchronize to `RWD.Poker.Clock`.
+Implement branch protection guards (prohibit direct commits to `main`), local vs remote push preferences, and PR/MR server-side completion protocols across commit and pull request skills/standards.
 
 ## Current Status
-Updated `/commit-cleanup` and `/create-pr` across framework root (`.agents/`), starter kit (`starter/.agents/`), and target repository (`/Users/ka8kgj/Documents/Source/RWD.Poker.Clock/.agents/`). Both skills now feature a mandatory summary presentation and confirmation gate before staging, committing, or pushing code. All template validations passed with 0 errors.
+Created feature branch `feature/branch-guard-and-pr-workflows`. Updated `/commit-cleanup` to inspect branch safety, suggest new branch names if on `main`, and offer push vs. local-only commit choices. Updated `/create-pr` to support PRs and MRs, handle pure git push, generate direct server links, and require server-side completion. Updated `git-and-pr-standards.md` and `workflow-standards.md`. Dual-layer sync to `starter/.agents/` complete and validated.
 
 ## Active Tasks
 | Task | Status | Notes |
 | :--- | :--- | :--- |
-| Add confirmation gate & git push to `/commit-cleanup` | Complete | Staging, commit, and push require explicit user confirmation |
-| Add confirmation gate & git push to `/create-pr` | Complete | Presentation of PR package and push requires explicit user confirmation |
-| Synchronize to `starter/` and `RWD.Poker.Clock` | Complete | All 3 environments updated and verified |
-| Run template validation | Complete | `scripts/validate-templates.sh` passed (0 errors) |
+| Branch Protection in `/commit-cleanup` | Complete | Blocks commits on `main`, suggests and checks out branch |
+| Push vs. Local Choice in `/commit-cleanup` | Complete | Prompt user to choose remote push vs. local-only commit |
+| Pure Git & PR/MR Server Completion in `/create-pr` | Complete | Pushes via git, provides direct URLs, strictly delegates merge to server |
+| Update Git and Workflow Standards | Complete | Documented branch protection, push choice, and server completion |
+| Dual-Layer Mirroring & Validation | Complete | Mirrored into `starter/` and passed `scripts/validate-templates.sh` |
 
 ## Recent Progress
-- Updated `commit-cleanup/SKILL.md` to present staged files, proposed commit message, and target branch, requiring user confirmation before executing `git add .`, `git commit`, and `git push`.
-- Updated `create-pr/SKILL.md` to present branches, PR title, description, and comparison URL, requiring user confirmation before pushing to remote.
-- Synchronized changes to `RWD.Ai.Stack` framework root, `starter/` bundle, and `/Users/ka8kgj/Documents/Source/RWD.Poker.Clock`.
-- Passed `scripts/validate-templates.sh` with 0 errors.
+- Switched to `feature/branch-guard-and-pr-workflows`.
+- Updated `.agents/skills/commit-cleanup/SKILL.md` and `starter/.agents/skills/commit-cleanup/SKILL.md` with branch safety checks and push preference options.
+- Updated `.agents/skills/create-pr/SKILL.md` and `starter/.agents/skills/create-pr/SKILL.md` to support PR/MR workflows with pure git commands and server completion gates.
+- Updated `.agents/standards/git-and-pr-standards.md` and `workflow-standards.md` in both root and starter kit.
+- Verified all templates with `scripts/validate-templates.sh` (0 errors).
 
 ## Immediate Next Action
-Stage and commit changes in `RWD.Ai.Stack`.
+Review changes with user and trigger `/commit-cleanup` when ready.

@@ -1,16 +1,37 @@
 ---
 name: commit-cleanup
-description: Perform code cleanup sweep, verify tests, stage changes, commit with Conventional Commits, and push to remote after user confirmation. Trigger with "/commit-cleanup" or "/commit".
+description: Enforce branch protection, perform code cleanup sweep, verify tests, stage changes, commit with Conventional Commits, and push or keep local after user confirmation. Trigger with "/commit-cleanup" or "/commit".
 argument-hint: "[optional commit message or scope]"
 ---
 
 # Purpose
 
-The `/commit-cleanup` skill performs a pre-commit sweep, verifies tests and memory, and safely stages, commits, and pushes changes to git after explicit user confirmation.
+The `/commit-cleanup` skill enforces branch protection (prohibiting direct commits to `main`), performs a pre-commit sweep, verifies tests and memory, and safely stages and commits changes, offering the user the choice to push to remote or keep local.
 
 ---
 
-## Step 1 — Code Hygiene Sweep
+## Step 1 — Branch Guard (Never Commit Directly to Main)
+
+1. **Check Current Branch:**
+   ```bash
+   git branch --show-current
+   ```
+2. **Evaluate Branch Safety:**
+   - If the current branch is `main` or `master`:
+     - **Halt direct commit:** Direct commits to `main`/`master` are strictly prohibited.
+     - **Inspect Changes:** Run `git status -s` and inspect uncommitted changes.
+     - **Suggest Branch Name:** Formulate a descriptive branch name based on the change scope (e.g. `feature/<topic>`, `fix/<topic>`, `refactor/<topic>`, `docs/<topic>`).
+     - **Prompt User:** Present the suggested branch name to the user and request confirmation to switch or an alternate branch name:
+       > *"Direct commits to `main` are prohibited. Proposing new branch: `<suggested-branch>`. Confirm to switch or specify a different branch name."*
+     - **Create and Switch:** Once approved:
+       ```bash
+       git checkout -b <branch-name>
+       ```
+   - If already on a feature or topic branch, proceed to Step 2.
+
+---
+
+## Step 2 — Code Hygiene Sweep
 
 Inspect modified files (`git status` / `git diff`) and perform cleanup:
 - **Remove Debug Logging:** Delete temporary `console.log`, `print()`, debugger breakpoints, or test print statements.
@@ -19,7 +40,7 @@ Inspect modified files (`git status` / `git diff`) and perform cleanup:
 
 ---
 
-## Step 2 — Memory & Verification
+## Step 3 — Memory & Verification
 
 - **Verify Implementation:** Run test suites or build scripts to confirm clean compilation and zero test failures.
 - **Update Memory State:** Run the `/handoff` skill to update `.agents/memory/AI_HANDOFF.md`.
@@ -27,19 +48,22 @@ Inspect modified files (`git status` / `git diff`) and perform cleanup:
 
 ---
 
-## Step 3 — Summary & User Confirmation Gate
+## Step 4 — Summary & Confirmation Gate (with Push Choice)
 
 Before staging or committing any files, present a complete pre-commit action plan to the user:
 
-1. **Files to be staged:** List all modified and untracked files to be added via `git add .`.
-2. **Proposed Conventional Commit Message:** Draft subject line and body following `.agents/standards/git-and-pr-standards.md` and `.agents/templates/commit-template.md`.
-3. **Remote Push Target:** Identify the target remote branch for `git push`.
+1. **Current Working Branch:** Display active branch name (confirming not `main`).
+2. **Files to be staged:** List all modified and untracked files to be added via `git add .`.
+3. **Proposed Conventional Commit Message:** Draft subject line and body following `.agents/standards/git-and-pr-standards.md` and `.agents/templates/commit-template.md`.
+4. **Push Destination Choice:**
+   - **Option 1 (Push to Remote):** Commit and immediately push to `origin/<current-branch>`.
+   - **Option 2 (Leave Local):** Commit locally only without pushing to remote.
 
-> **MANDATORY GATE:** Stop and ask the user for confirmation. Do NOT execute `git add`, `git commit`, or `git push` until the user explicitly confirms (e.g. "yes" or "proceed").
+> **MANDATORY GATE:** Stop and ask the user for confirmation and push preference. Do NOT execute `git add`, `git commit`, or `git push` until the user explicitly confirms (e.g. "push", "local only", or "proceed with push").
 
 ---
 
-## Step 4 — Staging, Commit, and Push Execution
+## Step 5 — Staging, Commit, and Push Execution
 
 Only after explicit user confirmation:
 1. **Stage Changes:**
@@ -50,8 +74,8 @@ Only after explicit user confirmation:
    ```bash
    git commit -m "<type>(<scope>): <concise subject>" -m "<optional body>"
    ```
-3. **Push to Remote:**
+3. **Push to Remote (If User Selected Remote Push):**
    ```bash
    git push -u origin <current-branch>
    ```
-4. **Final Confirmation:** Report the commit hash, remote branch status, and clean working tree.
+4. **Final Confirmation:** Report the commit hash, current branch status, and whether changes were pushed or left local.
