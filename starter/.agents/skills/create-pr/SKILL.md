@@ -42,7 +42,8 @@ Using `.agents/templates/pull-request-template.md`:
 - **PR / MR Title:** Formulate a Conventional Commit title matching the primary change (e.g., `feat(skills): add create-pr skill`).
 - **Summary:** Write 1-3 direct sentences summarizing what this change introduces and why.
 - **Related Issues:** Note issue numbers if applicable.
-- **Changes Made:** List concise bullet points of primary changes.
+- **What's New:** List new files, features, or capabilities introduced in this PR.
+- **What Changed:** List modifications to existing files, logic, or behavior.
 - **Commits (Squash-Merge Changelog):** List every commit on the branch in chronological order. This section is **required** because squash merges collapse the branch into a single commit, and the PR body becomes the permanent record. Angular versioning tools (`standard-version`, `semantic-release`) parse the squashed body for `feat:`, `fix:`, and `BREAKING CHANGE:` tokens to determine version bumps.
   Format each line as:
   ```markdown

@@ -90,7 +90,7 @@ Pull requests (GitHub) and Merge requests (GitLab / Bitbucket / Azure DevOps) ar
 
 ### PR / MR Description
 - Use [`.agents/templates/pull-request-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/pull-request-template.md) for all pull requests and merge requests.
-- Provide clear context: what changed, why it changed, and how it was tested.
+- Provide clear context: what is new, what changed, why it changed, and how it was tested.
 - Include links to related issues or requirements.
 
 ### Squash-Merge Commit Log Requirement

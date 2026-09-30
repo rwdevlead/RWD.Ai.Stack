@@ -4,8 +4,12 @@
 ## Related Issues
 <!-- Link related issues or tickets: e.g. Closes #123, Fixes #456 -->
 
-## Changes Made
-<!-- Bullet list of specific changes made in this pull request. -->
+## What's New
+<!-- List new files, features, or capabilities introduced in this PR. -->
+- 
+
+## What Changed
+<!-- List modifications to existing files, logic, or behavior. -->
 - 
 
 ## Commits
