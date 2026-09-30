@@ -75,10 +75,11 @@ Only after user confirmation:
    ```bash
    git push -u origin <current-branch>
    ```
-2. **Present Final Package & Server Link:**
-   - Display the finalized PR/MR title and markdown description block.
-   - For repositories with `.github/pull_request_template.md`, the clean comparison link automatically renders the template.
-   - For pre-filled URLs, ensure the link is styled as a clean Markdown anchor text (never raw URL-encoded strings).
+2. **Present Final Package & Pre-Populated Server Link:**
+   - **URL Pre-Population Requirement:** Always URL-encode `title` and `body` parameters into the comparison URL:
+     `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1&title=<encoded_title>&body=<encoded_body>`
+     *(This guarantees GitHub pre-populates the exact Conventional Commit title and full Markdown body for multi-commit branches and before templates are merged to default branch).*
+   - **Link Styling:** Always mask long URLs behind clean Markdown anchor text. Never output raw percent-encoded strings.
 3. **Require Server-Side Completion:**
    - Explicitly instruct the user to complete the review and merge on the server:
      > *"Branch pushed and PR/MR package ready. Please open the link below to review diffs and complete the merge on the server."*
@@ -87,5 +88,6 @@ Only after user confirmation:
 5. **Execution Link Rule:** ONLY at the conclusion of this PR/MR execution step (and never during planning, reviews, or general conversation), output the clean Markdown links to the commit and PR/MR as the very last lines:
    ```markdown
    🔗 **Commit Link:** [View Commit `<hash>` on GitHub](https://github.com/<owner>/<repo>/commit/<hash>)
-   👉 **Pull Request Link:** [Create / View Pull Request on GitHub](https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1)
+   👉 **Pull Request Link:** [Create / View Pull Request on GitHub](https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1&title=...&body=...)
    ```
+
