@@ -50,17 +50,30 @@ Inspect modified files (`git status` / `git diff`) and perform cleanup:
 
 ## Step 4 — Summary & Confirmation Gate (with Push Choice)
 
-Before staging or committing any files, present a complete pre-commit action plan to the user:
+Before staging or committing any files, present a compact, human-readable summary card:
 
-1. **Current Working Branch:** Display active branch name (confirming not `main`).
-2. **Files to be staged:** List all modified and untracked files to be added via `git add .`.
-3. **Proposed Conventional Commit Message:** Draft subject line and body following [`.agents/standards/git-and-pr-standards.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/standards/git-and-pr-standards.md) and [`.agents/templates/commit-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/commit-template.md).
-   - **Markdown Formatting Rule:** Always format multiline bodies using bullet points starting with `- ` and blank lines between sections. Never collapse bullet lists into a single continuous sentence.
-4. **Push Destination Choice:**
-   - **Option 1 (Push to Remote):** Commit and immediately push to `origin/<current-branch>`.
-   - **Option 2 (Leave Local):** Commit locally only without pushing to remote.
+```markdown
+### 📦 Pre-Commit Summary
+- **Branch:** `<active-branch>`
+- **Verification:** All tests & template checks passed (0 errors)
 
-> **MANDATORY GATE:** Stop and ask the user for confirmation and push preference. Do NOT execute `git add`, `git commit`, or `git push` until the user explicitly confirms (e.g. "push", "local only", or "proceed with push").
+#### Files to Stage (<count> files)
+- `M` path/to/modified-file
+- `A` path/to/added-file
+
+#### Commit Preview
+<type>(<scope>): <concise subject>
+
+- <Bullet item 1>
+- <Bullet item 2>
+
+---
+**Choose action to proceed:**
+1. **Commit & Push to Remote** (`origin/<active-branch>`)
+2. **Commit Local Only**
+```
+
+> **MANDATORY GATE:** Stop and ask the user for confirmation and push preference. Do NOT execute `git add`, `git commit`, or `git push` until the user explicitly confirms (e.g. "1" for push, "2" for local only).
 
 ---
 
@@ -71,14 +84,17 @@ Only after explicit user confirmation:
    ```bash
    git add .
    ```
-2. **Commit:** Ensure bullet points and paragraphs are preserved without shell line-collapsing (use separate `-m` flags or a temporary file):
+2. **Commit:** Ensure bullet points and paragraphs are preserved without shell line-collapsing (use separate `-m` flags or a temporary message file):
    ```bash
-   git commit -m "<type>(<scope>): <concise subject>" -m "<summary sentence>" -m "- Bullet 1
+   git commit -m "<type>(<scope>): <concise subject>" -m "- Bullet 1
    - Bullet 2"
    ```
 3. **Push to Remote (If User Selected Remote Push):**
    ```bash
    git push -u origin <current-branch>
    ```
-4. **Final Confirmation:** Report the commit hash, current branch status, and whether changes were pushed or left local.
-5. **Output Placement Rule:** When pushed to remote, always provide the direct commit web link as the very last line of the output so it is immediately accessible without scrolling.
+4. **Final Confirmation:** Report the commit hash, current branch status, and clean working tree.
+5. **Execution Link Rule:** ONLY at the conclusion of this commit/push execution step (and never during planning, reviews, or general conversation), output the clean Markdown link to the commit as the very last line:
+   ```markdown
+   🔗 **[View Commit `<hash>` on GitHub](https://github.com/<owner>/<repo>/commit/<hash>)**
+   ```

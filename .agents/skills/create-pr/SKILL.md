@@ -48,17 +48,21 @@ Using [`.agents/templates/pull-request-template.md`](file:///Users/ka8kgj/Docume
 
 ## Step 4 — Summary & Push Confirmation Gate
 
-Before running any push commands, present the full plan to the user:
+Before running any push commands, present a clean summary plan:
 
-1. **Source & Target Branches:** e.g., `feature/<name>` -> `main`.
-2. **Remote Push Status:** Check `git branch -vv` to verify if `git push -u origin <current-branch>` will be run.
-3. **Proposed Title:** Display the formatted Conventional Commit title.
-4. **Proposed Description:** Display the complete drafted Markdown body.
-5. **Direct Server Link:** Construct direct comparison link derived from `git config --get remote.origin.url`:
-   - GitHub: Pre-populate title and body via URL query parameters so GitHub loads the formatted Markdown directly:
-     `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1&title=<url_encoded_title>&body=<url_encoded_body>`
-     *(Note: Repositories with `.github/pull_request_template.md` also auto-render the template when opened without query parameters).*
-   - GitLab: `https://gitlab.com/<owner>/<repo>/-/merge_requests/new?merge_request%5Bsource_branch%5D=<branch>`
+```markdown
+### 🚀 Pull Request Plan
+- **Source Branch:** `<feature-branch>`
+- **Target Branch:** `<base-branch>`
+- **Commits:** <count> commits to merge
+- **Diff Scope:** <count> files modified
+
+#### Proposed PR Title
+<type>(<scope>): <concise subject>
+
+#### Proposed Description Preview
+<Markdown body following pull-request-template.md>
+```
 
 > **MANDATORY GATE:** Stop and ask the user for confirmation. Do NOT execute `git push` until the user explicitly confirms (e.g. "yes" or "proceed").
 
@@ -72,12 +76,16 @@ Only after user confirmation:
    git push -u origin <current-branch>
    ```
 2. **Present Final Package & Server Link:**
-   - Display the pre-filled direct web link with encoded title and markdown body.
-   - Display the finalized PR/MR title and markdown description block for easy reference or copying into the server UI.
+   - Display the finalized PR/MR title and markdown description block.
+   - For repositories with `.github/pull_request_template.md`, the clean comparison link automatically renders the template.
+   - For pre-filled URLs, ensure the link is styled as a clean Markdown anchor text (never raw URL-encoded strings).
 3. **Require Server-Side Completion:**
    - Explicitly instruct the user to complete the review and merge on the server:
-     > *"Branch pushed and PR/MR package ready. Please open the link above to review diffs and complete the merge on the server."*
+     > *"Branch pushed and PR/MR package ready. Please open the link below to review diffs and complete the merge on the server."*
    - The AI agent must **never** auto-merge the branch locally or attempt automated server-side merging.
 4. **Memory Update:** Update `AI_HANDOFF.md` recording that the PR/MR was prepared and branch pushed.
-5. **Output Placement Rule:** Always output the direct link to the commit and PR/MR as the very last lines of the output response so they are immediately visible without scrolling.
-
+5. **Execution Link Rule:** ONLY at the conclusion of this PR/MR execution step (and never during planning, reviews, or general conversation), output the clean Markdown links to the commit and PR/MR as the very last lines:
+   ```markdown
+   🔗 **Commit Link:** [View Commit `<hash>` on GitHub](https://github.com/<owner>/<repo>/commit/<hash>)
+   👉 **Pull Request Link:** [Create / View Pull Request on GitHub](https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1)
+   ```

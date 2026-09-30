@@ -107,8 +107,10 @@ Before opening or requesting review on a pull request, ensure:
 - **Human Server Completion:** The agent must **never** auto-merge or complete the PR/MR. The PR/MR remains open for the developer or reviewer to inspect, review, and complete on the remote server UI.
 
 ### Final Link Placement Standard
-Whenever presenting the completion of a commit, push, or PR/MR preparation:
-- The AI agent must always place the clickable direct web link to the commit and/or the PR comparison page as the **very last lines** of its output response.
-- This ensures links are instantly discoverable and accessible without requiring the user to scroll through long terminal or summary text.
+- **Execution Scoping:** Direct links to commits and PRs/MRs must **only** be output at the conclusion of actual commit/push or PR preparation execution events (`/commit-cleanup` and `/create-pr`).
+- **Do Not Output During Inquiries/Planning:** Never output commit or PR links during planning phases, reviews, question answers, or general conversation.
+- **Clean Markdown Anchors:** Always format links as clean Markdown hyperlinks with clear labels (e.g. `🔗 [View Commit 8ade219 on GitHub](url)` or `👉 [Create Pull Request on GitHub](url)`). Never output raw unformatted URLs or percent-encoded URL walls.
+- **Placement:** When an execution step concludes, place these formatted links as the **very last lines** of the output response.
+
 
 
