@@ -54,8 +54,10 @@ Before running any push commands, present the full plan to the user:
 2. **Remote Push Status:** Check `git branch -vv` to verify if `git push -u origin <current-branch>` will be run.
 3. **Proposed Title:** Display the formatted Conventional Commit title.
 4. **Proposed Description:** Display the complete drafted Markdown body.
-5. **Direct Server Link:** Display comparison link derived from `git config --get remote.origin.url`:
-   - GitHub: `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1`
+5. **Direct Server Link:** Construct direct comparison link derived from `git config --get remote.origin.url`:
+   - GitHub: Pre-populate title and body via URL query parameters so GitHub loads the formatted Markdown directly:
+     `https://github.com/<owner>/<repo>/compare/<base>...<branch>?expand=1&title=<url_encoded_title>&body=<url_encoded_body>`
+     *(Note: Repositories with `.github/pull_request_template.md` also auto-render the template when opened without query parameters).*
    - GitLab: `https://gitlab.com/<owner>/<repo>/-/merge_requests/new?merge_request%5Bsource_branch%5D=<branch>`
 
 > **MANDATORY GATE:** Stop and ask the user for confirmation. Do NOT execute `git push` until the user explicitly confirms (e.g. "yes" or "proceed").
@@ -70,8 +72,8 @@ Only after user confirmation:
    git push -u origin <current-branch>
    ```
 2. **Present Final Package & Server Link:**
-   - Display the direct web link to create/open the PR or MR on the server.
-   - Display the finalized PR/MR title and description ready to paste into the server UI.
+   - Display the pre-filled direct web link with encoded title and markdown body.
+   - Display the finalized PR/MR title and markdown description block for easy reference or copying into the server UI.
 3. **Require Server-Side Completion:**
    - Explicitly instruct the user to complete the review and merge on the server:
      > *"Branch pushed and PR/MR package ready. Please open the link above to review diffs and complete the merge on the server."*

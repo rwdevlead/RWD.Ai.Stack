@@ -55,6 +55,7 @@ Before staging or committing any files, present a complete pre-commit action pla
 1. **Current Working Branch:** Display active branch name (confirming not `main`).
 2. **Files to be staged:** List all modified and untracked files to be added via `git add .`.
 3. **Proposed Conventional Commit Message:** Draft subject line and body following `.agents/standards/git-and-pr-standards.md` and `.agents/templates/commit-template.md`.
+   - **Markdown Formatting Rule:** Always format multiline bodies using bullet points starting with `- ` and blank lines between sections. Never collapse bullet lists into a single continuous sentence.
 4. **Push Destination Choice:**
    - **Option 1 (Push to Remote):** Commit and immediately push to `origin/<current-branch>`.
    - **Option 2 (Leave Local):** Commit locally only without pushing to remote.
@@ -70,9 +71,10 @@ Only after explicit user confirmation:
    ```bash
    git add .
    ```
-2. **Commit:**
+2. **Commit:** Ensure bullet points and paragraphs are preserved without shell line-collapsing (use separate `-m` flags or a temporary file):
    ```bash
-   git commit -m "<type>(<scope>): <concise subject>" -m "<optional body>"
+   git commit -m "<type>(<scope>): <concise subject>" -m "<summary sentence>" -m "- Bullet 1
+   - Bullet 2"
    ```
 3. **Push to Remote (If User Selected Remote Push):**
    ```bash

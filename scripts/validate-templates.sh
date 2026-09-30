@@ -51,6 +51,17 @@ check_file_mirror "skills/project-ai-setup/SKILL.md"
 check_file_mirror "skills/refactor-code/SKILL.md"
 check_file_mirror "skills/review/SKILL.md"
 
+if [ ! -f "$FRAMEWORK_ROOT/.github/pull_request_template.md" ]; then
+  echo "  ❌ Missing root .github/pull_request_template.md"
+  ERRORS=$((ERRORS + 1))
+fi
+if [ ! -f "$FRAMEWORK_ROOT/starter/.github/pull_request_template.md" ]; then
+  echo "  ❌ Missing starter/.github/pull_request_template.md"
+  ERRORS=$((ERRORS + 1))
+else
+  echo "  ✓ Mirrored: .github/pull_request_template.md"
+fi
+
 # Check 2: SKILL.md YAML Frontmatter Linter
 echo "  [2/3] Validating SKILL.md YAML Frontmatter..."
 
