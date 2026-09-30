@@ -81,3 +81,4 @@ Only after explicit user confirmation:
    git push -u origin <current-branch>
    ```
 4. **Final Confirmation:** Report the commit hash, current branch status, and whether changes were pushed or left local.
+5. **Output Placement Rule:** When pushed to remote, always provide the direct commit web link as the very last line of the output so it is immediately accessible without scrolling.

@@ -79,3 +79,5 @@ Only after user confirmation:
      > *"Branch pushed and PR/MR package ready. Please open the link above to review diffs and complete the merge on the server."*
    - The AI agent must **never** auto-merge the branch locally or attempt automated server-side merging.
 4. **Memory Update:** Update `AI_HANDOFF.md` recording that the PR/MR was prepared and branch pushed.
+5. **Output Placement Rule:** Always output the direct link to the commit and PR/MR as the very last lines of the output response so they are immediately visible without scrolling.
+
