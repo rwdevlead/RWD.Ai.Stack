@@ -20,6 +20,8 @@ Before making changes, read:
 - `.agents/standards/code-documentation-standards.md`
 - `.agents/standards/coding-standards.md`
 - `.agents/standards/workflow-standards.md`
+- `.agents/standards/git-and-pr-standards.md`
+- `.agents/standards/ansible-standards.md`, `.agents/standards/terraform-standards.md`, and `.agents/standards/shared-config-standards.md` *(conditionally, if the repository contains `iac/`, Terraform, or Ansible files)*
 - `.agents/templates/context-template.md`
 - `.agents/templates/handoff-template.md`
 - `.agents/skills/project-ai-refresh/checklist.md`
@@ -58,7 +60,7 @@ Treat repository source, tests, configuration, and current standards as more aut
 
 Identify:
 
-- Missing mandatory standard references
+- Missing mandatory standard references (always check the 6 core software standards; conditionally require `ansible-standards.md`, `terraform-standards.md`, `shared-config-standards.md`, and the IaC skills `/new-ansible-role`, `/new-terraform-module`, `/add-infra-host`, `/secrets-audit` **only** when the repository contains `iac/`, Terraform, or Ansible files)
 - Stale template language
 - Contradictions between root `AGENTS.md` and `.agents/` standards
 - Memory entries that are stale, duplicated, or no longer sourced

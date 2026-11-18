@@ -51,6 +51,7 @@ Evaluate the Review Brief from six completely independent viewpoints. Each revie
 #### 4. The Security & Reliability Specialist
 *Focus: Operational safety and resilience.*
 - Evaluate input validation, state bounds, error handling, failure isolation, and security risks.
+- Verify that secrets and tokens are isolated in restricted `.env`/secret files (`0600`, diff-suppressed) rather than interpolated inline into main configuration or Compose files where diff suppression would hide non-secret changes.
 - Identify highest-impact operational and security vulnerabilities.
 
 #### 5. The Maintainer

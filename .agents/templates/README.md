@@ -9,3 +9,6 @@ This directory contains reusable markdown fragments and prompt templates used to
 - [`plan-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/plan-template.md): Template for multi-step task and feature plans.
 - [`commit-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/commit-template.md): Template for Conventional Commit messages.
 - [`pull-request-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/pull-request-template.md): Template for GitHub pull request descriptions.
+- [`ansible-role-readme-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/ansible-role-readme-template.md): Standard documentation template for Ansible role READMEs.
+- [`ansible-role-skeleton.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/ansible-role-skeleton.md): Starter snippets for Ansible role defaults, tasks (`.env` + `docker-compose.yml`), handlers, playbooks, and `Makefile` targets.
+- [`terraform-module-readme-template.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/templates/terraform-module-readme-template.md): Standard documentation template for Terraform module READMEs.

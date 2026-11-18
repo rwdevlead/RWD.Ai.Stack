@@ -13,11 +13,12 @@ This document defines the core code quality, architecture, and implementation st
 
 ---
 
-## 2. Defensive Coding & Error Handling
+## 2. Defensive Coding, Security & Error Handling
 
 - **Explicit Parameter Validation:** Validate inputs at function and API boundaries.
 - **No Silent Error Swallowing:** Do not wrap code in empty `try/catch` blocks or return generic fallbacks without logging or re-throwing appropriate errors.
 - **Null & Boundary Safety:** Check object state and array bounds before dereferencing properties or accessing elements.
+- **Secret & Configuration Isolation:** Never interpolate plaintext secrets, API tokens, or credentials directly into general configuration or orchestration templates (such as `docker-compose.yml` or application manifests) where diff/log suppression (`diff: false`, `no_log: true`) would hide non-secret configuration changes. Isolate secrets into dedicated, permission-restricted environment/secret files (`0600`, diff-suppressed) and reference them via variable substitution (`${SECRET_KEY}`) in the main configuration file so configuration diffs remain visible without exposing secrets.
 
 ---
 

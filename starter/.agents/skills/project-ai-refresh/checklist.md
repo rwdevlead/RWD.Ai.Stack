@@ -17,7 +17,7 @@ Use this checklist with `.agents/skills/project-ai-refresh/SKILL.md`.
 
 ## Comparison
 
-- Check for missing required standard references.
+- Check for missing required standard references (core 6 standards always; IaC standards/skills `ansible-standards.md`, `terraform-standards.md`, `shared-config-standards.md`, `/new-ansible-role`, `/new-terraform-module`, `/add-infra-host`, `/secrets-audit` conditionally when `iac/`, Terraform, or Ansible files exist in the repository).
 - Check for stale template wording.
 - Check for broken paths.
 - Check for contradictions between project instructions and framework instructions.

@@ -40,6 +40,7 @@ Every AI session operating on this repository MUST follow this 5-step lifecycle:
 - Maintain agent-agnostic formatting (standard GitHub Flavored Markdown, valid YAML frontmatter for skills).
 - Never modify `legacy-repo/` unless explicitly instructed.
 - **Strict Scope Control:** Do not refactor code outside the defined scope of the instruction without explicit permission.
+- **CLI Authentication Pre-Check:** Before executing any CLI tool or subcommand that requires authentication (e.g., `gh`, `terraform` Cloud / HCP, cloud or registry CLIs), verify authentication status first. If unauthenticated or expired, stop and give the user the opportunity to log in before calling the method.
 
 ### Step 4: Verify
 - Validate markdown syntax, skill YAML frontmatter headers, and path references.
@@ -59,7 +60,7 @@ Before committing work or opening a PR/MR:
 - **Branch Protection:** Never commit directly to `main` or `master`. Always perform work on a dedicated topic branch (`feature/`, `fix/`, etc.). If on `main`, create a branch first.
 - **Git & PR/MR Standards:** Follow [`.agents/standards/git-and-pr-standards.md`](file:///Users/ka8kgj/Documents/Source/RWD.Ai.Stack/.agents/standards/git-and-pr-standards.md) for branch naming, commit format, and quality gates.
 - **Pre-Commit Sweep:** Run `/commit-cleanup` to inspect branch guards, code hygiene, verify tests, formulate Conventional Commits, and select push preference (push immediately vs. leave local).
-- **Create Pull/Merge Requests:** Run `/create-pr` to review branch diffs, validate quality gates, push the branch, and package a structured PR/MR description and direct comparison link. The agent halts execution for the developer to review and complete the merge on the server.
+- **Create Pull/Merge Requests:** Run `/create-pr` to review branch diffs, validate quality gates, push the branch, and create the PR via `gh` when installed (or package a structured PR/MR description and direct comparison link). The agent halts execution for the developer to review and complete the merge on the server.
 
 ---
 

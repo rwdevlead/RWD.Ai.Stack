@@ -31,6 +31,7 @@ Before writing or modifying code, inspect repository state:
 1. Perform minimal invasive changes to fulfill requirements.
 2. Follow existing code style, architecture, and design patterns.
 3. Keep edits atomic and focused. Do not refactor code outside the scope of the instruction without asking permission.
+4. **CLI Authentication Pre-Check:** Before executing any CLI tool or subcommand that requires authentication (e.g., `gh`, `terraform` Cloud / HCP, cloud or registry CLIs), verify authentication status first. If unauthenticated or expired, stop and give the user the opportunity to log in before calling the method.
 
 ### Phase 4: Empirical Verification
 1. **Never declare success without empirical evidence** when implementing functional changes.
@@ -62,7 +63,7 @@ Follow `.agents/standards/git-and-pr-standards.md` for full git and pull/merge r
   - Choose push preference during commit: push immediately to remote branch or leave local.
 - **Pull Requests & Merge Requests:**
   - Run `/commit-cleanup` before committing to ensure clean code, branch guards, and memory synchronization.
-  - Run `/create-pr` to validate quality gates, push the branch, and generate the PR/MR package with direct server links. Complete and merge on the server.
+  - Run `/create-pr` to validate quality gates, push the branch, and create the PR via `gh` when installed (or generate the PR/MR package with direct server links). Complete and merge on the server.
 
 ---
 

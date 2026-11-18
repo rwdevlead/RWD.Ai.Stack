@@ -20,6 +20,8 @@ Before making changes, read:
 - `.agents/standards/code-documentation-standards.md`
 - `.agents/standards/coding-standards.md`
 - `.agents/standards/workflow-standards.md`
+- `.agents/standards/git-and-pr-standards.md`
+- `.agents/standards/ansible-standards.md`, `.agents/standards/terraform-standards.md`, and `.agents/standards/shared-config-standards.md` *(conditionally, if the repository contains `iac/`, Terraform, or Ansible files)*
 - `.agents/templates/context-template.md`
 - `.agents/templates/handoff-template.md`
 - `.agents/skills/project-ai-setup/checklist.md`
@@ -37,6 +39,7 @@ Inspect repository files before writing:
 - `README.md`
 - Solution, project, package, or manifest files
 - Source and test folders
+- Infrastructure-as-Code (IaC) folders or files (`iac/`, Terraform `*.tf`, Ansible `playbooks/`, `roles/`, `inventories/`, `iac/shared/infrastructure.yml`)
 - CI and build/test configuration
 
 Do not infer durable facts from naming alone when repository files can verify them.
@@ -62,7 +65,7 @@ Keep root `AGENTS.md` concise and project-specific. It should tell future AI age
 - What the repository is
 - Where source, tests, and entry points live
 - Which commands and conventions are verified
-- Which `.agents/standards/` are mandatory
+- Which `.agents/standards/` are mandatory (always include the 6 core software standards; conditionally wire `ansible-standards.md`, `terraform-standards.md`, `shared-config-standards.md`, and the IaC skills `/new-ansible-role`, `/new-terraform-module`, `/add-infra-host`, `/secrets-audit` **only** when `iac/`, Terraform, or Ansible files are present in the repository)
 - How to use project memory (`.agents/memory/`)
 
 If an existing root `AGENTS.md` is present, preserve valid project-specific guidance and merge in missing shared-framework requirements.
