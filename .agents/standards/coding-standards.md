@@ -45,7 +45,8 @@ This document defines the mandatory code and content standards for maintainers a
 
 ---
 
-## 5. Verification & Quality Assurance
+## 5. Verification, Secret Isolation & Quality Assurance
 
 - **Syntax Verification:** Validate frontmatter, link paths, and markdown rendering before finishing work.
+- **Secret & Configuration Isolation:** Never embed plaintext secrets or tokens directly into general configuration or orchestration files (such as `docker-compose.yml`) where diff suppression (`diff: false`) would hide non-secret configuration diffs. Isolate secrets into dedicated, restricted `.env`/secret files (`0600`, `diff: false`) and reference `${SECRET_KEY}` in the main config file so diffs remain visible without exposing credentials.
 - **Clean Repo Policy:** Never leave scratch scripts or un-tracked temporary files outside of scratch directories.

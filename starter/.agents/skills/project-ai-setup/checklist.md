@@ -9,6 +9,7 @@ Use this checklist with `.agents/skills/project-ai-setup/SKILL.md`.
 - Read root `README.md`, if present.
 - Identify source folders.
 - Identify test folders.
+- Identify Infrastructure-as-Code (IaC) folders or files (`iac/`, Terraform `*.tf`, or Ansible `playbooks/` / `roles/` / `inventories/`).
 - Identify solution, project, package, or manifest files.
 - Identify build, test, package, deploy, or local service command surfaces.
 - Identify existing project memory or handoff files.
@@ -17,7 +18,7 @@ Use this checklist with `.agents/skills/project-ai-setup/SKILL.md`.
 
 - Replace placeholders with verified repository facts.
 - Preserve existing valid project-specific guidance.
-- Include required `.agents/standards/*` references.
+- Include required `.agents/standards/*` references (always wire core standards; conditionally wire `ansible-standards.md`, `terraform-standards.md`, `shared-config-standards.md`, and IaC skills only when IaC files exist in the repo).
 - Include project memory expectations (`.agents/memory/`).
 - Avoid duplicating full standards content.
 

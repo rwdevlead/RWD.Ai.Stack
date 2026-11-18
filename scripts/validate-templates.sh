@@ -29,27 +29,37 @@ check_file_mirror() {
   fi
 }
 
+check_file_mirror "standards/ansible-standards.md"
 check_file_mirror "standards/code-documentation-standards.md"
 check_file_mirror "standards/coding-standards.md"
 check_file_mirror "standards/documentation-standards.md"
 check_file_mirror "standards/git-and-pr-standards.md"
 check_file_mirror "standards/memory-policy.md"
+check_file_mirror "standards/shared-config-standards.md"
+check_file_mirror "standards/terraform-standards.md"
 check_file_mirror "standards/workflow-standards.md"
 
+check_file_mirror "templates/ansible-role-readme-template.md"
+check_file_mirror "templates/ansible-role-skeleton.md"
 check_file_mirror "templates/commit-template.md"
 check_file_mirror "templates/context-template.md"
 check_file_mirror "templates/handoff-template.md"
 check_file_mirror "templates/plan-template.md"
 check_file_mirror "templates/pull-request-template.md"
+check_file_mirror "templates/terraform-module-readme-template.md"
 
+check_file_mirror "skills/add-infra-host/SKILL.md"
 check_file_mirror "skills/commit-cleanup/SKILL.md"
 check_file_mirror "skills/create-pr/SKILL.md"
 check_file_mirror "skills/generate-docs/SKILL.md"
 check_file_mirror "skills/handoff/SKILL.md"
+check_file_mirror "skills/new-ansible-role/SKILL.md"
+check_file_mirror "skills/new-terraform-module/SKILL.md"
 check_file_mirror "skills/project-ai-refresh/SKILL.md"
 check_file_mirror "skills/project-ai-setup/SKILL.md"
 check_file_mirror "skills/refactor-code/SKILL.md"
 check_file_mirror "skills/review/SKILL.md"
+check_file_mirror "skills/secrets-audit/SKILL.md"
 
 if [ ! -f "$FRAMEWORK_ROOT/.github/pull_request_template.md" ]; then
   echo "  ❌ Missing root .github/pull_request_template.md"
