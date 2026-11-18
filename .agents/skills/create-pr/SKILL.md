@@ -91,9 +91,12 @@ Only after user confirmation:
    git push -u origin <current-branch>
    ```
 2. **Create Pull Request via `gh` (Preferred on GitHub) or Generate Pre-Populated Link (Fallback):**
-   - **CLI Authentication Pre-Check:** If the repository remote is GitHub and `gh` is installed (`command -v gh`), always verify authentication status first (`gh auth status`) before calling any `gh pr` subcommand. If `gh` is not logged in or the token has expired, stop and prompt the user so they have the opportunity to authenticate first (e.g., `gh auth login`) before continuing, or ask if they prefer the fallback comparison link.
-   - **Option A — GitHub CLI (`gh`) Available & Authenticated:**
-     Once `gh auth status` succeeds, create or update the Pull Request directly using `gh`:
+   - **Step 2a — Check If `gh` Is Installed (`command -v gh`):**
+     First check whether `gh` is installed on the host. If `gh` is **not installed** (or the remote is a non-GitHub host), skip `gh` authentication checks and proceed directly to **Option B (Fallback Pre-Populated Server Link)**.
+   - **Step 2b — Check `gh` Authentication (`gh auth status`):**
+     Only when `gh` **is installed** and the repository remote is GitHub, verify authentication status via `gh auth status` before calling any `gh pr` subcommand. If `gh` is not logged in or the token has expired, stop and prompt the user so they have the opportunity to authenticate first (e.g., `gh auth login`) before continuing, or ask if they prefer the fallback comparison link.
+   - **Option A — GitHub CLI (`gh`) Installed & Authenticated:**
+     Once `command -v gh` and `gh auth status` both succeed, create or update the Pull Request directly using `gh`:
      ```bash
      gh pr create --base <base> --head <branch> --title "<title>" --body-file <temp_body_file>
      ```

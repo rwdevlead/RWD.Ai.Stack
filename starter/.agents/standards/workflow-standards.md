@@ -31,7 +31,7 @@ Before writing or modifying code, inspect repository state:
 1. Perform minimal invasive changes to fulfill requirements.
 2. Follow existing code style, architecture, and design patterns.
 3. Keep edits atomic and focused. Do not refactor code outside the scope of the instruction without asking permission.
-4. **CLI Authentication Pre-Check:** Before executing any CLI tool or subcommand that requires authentication (e.g., `gh`, `terraform` Cloud / HCP, cloud or registry CLIs), verify authentication status first. If unauthenticated or expired, stop and give the user the opportunity to log in before calling the method.
+4. **CLI Installation & Authentication Pre-Check:** Before executing any optional or authenticated CLI tool (e.g., `gh`, `terraform` Cloud / HCP, cloud or registry CLIs), first check whether the CLI is installed (`command -v <cli>`). If it is not installed, use the fallback/alternative method directly. Only if the CLI is installed, verify its authentication status before calling the method; if unauthenticated or expired, stop and give the user the opportunity to log in first.
 
 ### Phase 4: Empirical Verification
 1. **Never declare success without empirical evidence** when implementing functional changes.

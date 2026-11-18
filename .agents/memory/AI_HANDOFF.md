@@ -7,7 +7,7 @@
 4. Allow and prefer the GitHub CLI (`gh`) where appropriate in `git-and-pr-standards.md`, `workflow-standards.md`, and `/create-pr` alongside standard `git` commands.
 
 ## Current Status
-All implementation tasks and validation checks (`./scripts/validate-templates.sh`) are complete with 0 errors. Ready to create a feature branch, commit changes via `/commit-cleanup`, and open a Pull Request via `/create-pr`.
+All implementation tasks and validation checks (`./scripts/validate-templates.sh`) are complete with 0 errors. Branch `feature/iac-assets-and-gh-cli` has been committed, pushed to `origin`, and the Pull Request package has been prepared for human review and merge on GitHub.
 
 ## Active Tasks
 | Task | Status | Notes |
@@ -18,7 +18,7 @@ All implementation tasks and validation checks (`./scripts/validate-templates.sh
 | Generalize Hardcoded `RWD.Infrastructure` Details in Standards & Skills | Complete | Replaced hardcoded org/node/VM/app names (`realworlddevelopers`, `pve-d01`, `pve-p01`, `pihole_instances`, etc.) with generic placeholders and `(e.g., ...)` examples across `.agents/` and `starter/.agents/` |
 | Add Smart IaC Discovery to `/project-ai-setup` and `/project-ai-refresh` | Complete | Updated `SKILL.md` and `checklist.md` for both skills (and `starter/` mirrors) to conditionally wire IaC standards and skills only when `iac/`, Terraform, or Ansible files are present |
 | Update Root `README.md` | Complete | Synchronized directory tree and asset inventory with all 9 standards, 8 templates, and 12 skills |
-| Validate, Branch, Commit & Open PR in `RWD.Ai.Stack` | Pending | Ready to create feature branch, commit, and open PR |
+| Validate, Branch, Commit & Open PR in `RWD.Ai.Stack` | Complete | Branch `feature/iac-assets-and-gh-cli` pushed to `origin` and PR package generated for server-side merge |
 
 ## Recent Progress
 - Integrated `gh` CLI support into `git-and-pr-standards.md`, `workflow-standards.md`, and `create-pr/SKILL.md` across both `.agents/` and `starter/.agents/`.
